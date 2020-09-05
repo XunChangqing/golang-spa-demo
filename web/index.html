@@ -1,0 +1,32 @@
+<html>
+<body>
+  <script>
+    async function Calculate() {
+      //alert('calculate');
+      var num1 = document.getElementById('num1').value;
+      var num2 = document.getElementById('num2').value;
+      const url = '/api/add';
+      const data = {
+        OperandA: (Number)(num1),
+        OperandB: (Number)(num2)
+      };
+      console.log(data)
+      const otherParam = {
+        headers: { "content-type": "application/json; charset=UTF-8" },
+        body: JSON.stringify(data),
+        method: "POST"
+      }
+      let response = await fetch(url, otherParam)
+
+      let js = await response.json()
+      console.log(js)
+      document.getElementById('result').innerText = js.Result
+    }
+  </script>
+  OperandA # <input type="text" id="num1" /> </br>
+  OperandB # <input type="text" id="num2" /> </br>
+  <button type="button" name="cmdButCALCULATE" onclick="Calculate();"> CALCULATE </button>
+  <p id="result">10</p>
+</body>
+
+</html>
